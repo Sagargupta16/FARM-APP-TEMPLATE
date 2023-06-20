@@ -1,0 +1,10 @@
+# Ignore specific files
+node_modules/
+dist/
+build/
+.github/
+
+# Ignore specific file types
+*.log
+*.txt
+

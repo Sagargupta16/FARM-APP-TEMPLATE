@@ -1,0 +1,25 @@
+# Ignore built files
+build/
+
+# Ignore compiled CSS files
+dist/
+
+# Ignore vendor stylesheets
+vendor/
+
+# Ignore specific files or directories
+coverage/
+public/assets/
+
+# Ignore files with specific extensions
+*.log
+*.txt
+*.md
+*.js
+
+Dockerfile*
+
+package-lock.json
+package.json
+
+yarn.lock

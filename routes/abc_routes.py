@@ -1,0 +1,1 @@
+# Delete this file if you don't want to use it. use *_routes.py pattern to create new routes file.
