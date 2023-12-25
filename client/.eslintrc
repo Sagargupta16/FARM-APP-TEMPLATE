@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "func-style": ["error", "expression"],
+    "keyword-spacing": "error",
+    "object-curly-spacing": ["error", "always"],
+    "no-unused-vars": "warn",
+    "max-lines-per-function": ["error", { "max": 50 }],
+    "camelcase": "error",
+    "consistent-this": ["error", "self"],
+    "class-methods-use-this": "error",
+    "no-try-catch": "error",
+    "prefer-promise-reject-errors": "error"
+  }
+}
