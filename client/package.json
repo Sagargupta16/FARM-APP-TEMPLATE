@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../client_build && mv build ../client_build",
+    "build": "react-scripts build && powershell -Command \"if (Test-Path ../client_build) { Remove-Item -Recurse -Force ../client_build }; Move-Item build ../client_build\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

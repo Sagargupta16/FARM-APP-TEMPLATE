@@ -53,3 +53,6 @@ Thumbs.db
 
 # Ignore any other custom entries specific to your project
 
+venv/
+
+client_build/
