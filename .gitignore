@@ -54,5 +54,16 @@ Thumbs.db
 # Ignore any other custom entries specific to your project
 
 venv/
+env/
+ENV/
 
 client_build/
+client/build/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# MongoDB data
+data/

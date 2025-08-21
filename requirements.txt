@@ -1,5 +1,14 @@
 fastapi==0.116.1
 uvicorn[standard]==0.24.0
+pymongo==4.6.0
+motor==3.7.1
+pydantic==2.5.0
+pydantic[email]==2.5.0
+PyYAML==6.0.1
+python-multipart==0.0.6
+pytest==7.4.3
+httpx==0.25.2pi==0.116.1
+uvicorn[standard]==0.24.0
 pymongo==4.14.1
 motor==3.7.1
 pydantic==2.5.0
