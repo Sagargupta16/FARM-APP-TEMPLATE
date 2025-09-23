@@ -1,5 +1,5 @@
 fastapi==0.116.2
-uvicorn[standard]==0.24.0
+uvicorn[standard]==0.37.0
 pymongo==4.15.1
 motor==3.7.1
 pydantic==2.11.9
@@ -8,7 +8,7 @@ PyYAML==6.0.2
 python-multipart==0.0.6
 pytest==8.4.2
 httpx==0.25.2pi==0.116.1
-uvicorn[standard]==0.24.0
+uvicorn[standard]==0.37.0
 pymongo==4.15.1
 motor==3.7.1
 pydantic==2.11.9
