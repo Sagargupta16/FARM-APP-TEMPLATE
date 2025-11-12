@@ -6,7 +6,7 @@ pydantic==2.12.4
 pydantic[email]==2.12.4
 PyYAML==6.0.3
 python-multipart==0.0.6
-pytest==8.4.2
+pytest==9.0.1
 httpx==0.25.2pi==0.116.1
 uvicorn[standard]==0.38.0
 pymongo==4.15.3
