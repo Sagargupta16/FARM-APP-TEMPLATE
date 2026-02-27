@@ -1,17 +1,15 @@
-version: '3.8'
-
 services:
   # MongoDB Database
   mongodb:
-    image: mongo:latest
+    image: mongo:8
     container_name: farm_mongodb
     restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: farm_template
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-farm_template}
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -27,7 +25,9 @@ services:
     environment:
       - MONGODB_HOST=mongodb
       - MONGODB_PORT=27017
-      - MONGODB_DATABASE=farm_template
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-farm_template}
+      - MONGODB_USERNAME=${MONGODB_USERNAME:-admin}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
     depends_on:
       - mongodb
     networks:

@@ -1,4 +1,5 @@
 .git
+.github
 __pycache__
 *.pyc
 *.pyo
@@ -8,5 +9,11 @@ __pycache__
 *.tar.gz
 *.zip
 *.rar
-.dockerignore
-client
+venv/
+client/node_modules/
+client_build/
+tests/
+.flake8
+.version
+renovate.json
+sonar-project.properties

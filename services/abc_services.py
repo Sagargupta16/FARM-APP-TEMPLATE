@@ -1,8 +1,7 @@
-from motor.motor_asyncio import AsyncIOMotorClient
 from models.abc_models import User, UserCreate
 from config.secrets_parser import get_database
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
 class UserService:
@@ -33,12 +32,12 @@ class UserService:
 
     async def create_user(self, user_data: UserCreate) -> User:
         """Create a new user"""
-        user_dict = user_data.dict()
-        user_dict["created_at"] = datetime.now()
-        
+        user_dict = user_data.model_dump()
+        user_dict["created_at"] = datetime.now(timezone.utc)
+
         result = await self.collection.insert_one(user_dict)
         user_dict["id"] = str(result.inserted_id)
-        
+
         return User(**user_dict)
 
     async def delete_user(self, user_id: str) -> bool:

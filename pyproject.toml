@@ -1,0 +1,39 @@
+[project]
+name = "farm-app-template"
+version = "1.0.0"
+description = "A FARM (FastAPI, React, MongoDB) stack template"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi==0.133.1",
+    "uvicorn[standard]==0.41.0",
+    "pymongo==4.16.0",
+    "motor==3.7.1",
+    "pydantic[email]==2.12.5",
+    "PyYAML==6.0.3",
+    "python-multipart==0.0.22",
+    "passlib[bcrypt]==1.7.4",
+    "python-dotenv==1.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.2",
+    "httpx==0.28.1",
+    "ruff",
+    "coverage",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E226", "E302"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]

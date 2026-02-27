@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+
+const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: '', email: '' });
   const [isLoading, setIsLoading] = useState(false);
 
-  const API_BASE = 'http://localhost:8000/api/v1';
-
-  // Fetch users from API
   const fetchUsers = async () => {
     try {
       setIsLoading(true);
@@ -24,34 +23,30 @@ function App() {
     }
   };
 
-  // Create new user
   const createUser = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(`${API_BASE}/users`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser),
       });
       if (response.ok) {
         setNewUser({ name: '', email: '' });
-        fetchUsers(); // Refresh the list
+        fetchUsers();
       }
     } catch (error) {
       console.error('Error creating user:', error);
     }
   };
 
-  // Delete user
   const deleteUser = async (userId) => {
     try {
       const response = await fetch(`${API_BASE}/users/${userId}`, {
         method: 'DELETE',
       });
       if (response.ok) {
-        fetchUsers(); // Refresh the list
+        fetchUsers();
       }
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -67,7 +62,7 @@ function App() {
       <header className="App-header">
         <h1>FARM Stack Template</h1>
         <p>FastAPI + React + MongoDB</p>
-        
+
         <div className="user-form">
           <h2>Add New User</h2>
           <form onSubmit={createUser}>
