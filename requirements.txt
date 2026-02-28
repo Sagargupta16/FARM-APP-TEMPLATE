@@ -1,4 +1,4 @@
-fastapi==0.133.1
+fastapi==0.134.0
 uvicorn[standard]==0.41.0
 pymongo==4.16.0
 motor==3.7.1
