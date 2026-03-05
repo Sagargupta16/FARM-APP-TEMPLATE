@@ -1,19 +1,5 @@
+node_modules
 .git
-.github
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-*.swp
-*.log
-*.tar.gz
-*.zip
-*.rar
-venv/
-client/node_modules/
-client_build/
-tests/
-.flake8
-.version
-renovate.json
-sonar-project.properties
+.env
+dist
+# v1
