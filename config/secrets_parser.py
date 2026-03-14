@@ -1,15 +1,20 @@
+from __future__ import annotations
+
+import logging
 import os
-import yaml
-import pymongo
 from pathlib import Path
-from motor.motor_asyncio import AsyncIOMotorClient
+
+import pymongo
+import yaml
 from dotenv import load_dotenv
+from motor.motor_asyncio import AsyncIOMotorClient
 
 load_dotenv()
+logger = logging.getLogger("farm_app")
 
 # Load config from secrets.yml as fallback defaults
 config_path = Path(__file__).parent / "secrets.yml"
-with open(config_path, "r") as stream:
+with open(config_path) as stream:
     secrets = yaml.safe_load(stream)
 
 # Prefer environment variables, fall back to secrets.yml
@@ -28,12 +33,14 @@ else:
 # Async MongoDB client
 client = AsyncIOMotorClient(MONGODB_URL)
 
+
 def get_database():
     """Get the database instance"""
     return client[mongodb_database]
 
-# Function to connect to MongoDB database (sync version for testing)
+
 def connect_to_mongodb():
+    """Connect to MongoDB (sync version for testing)"""
     try:
         sync_client = pymongo.MongoClient(
             host=mongodb_host,
@@ -43,24 +50,26 @@ def connect_to_mongodb():
             authSource=mongodb_database if mongodb_username else None,
             authMechanism="SCRAM-SHA-256" if mongodb_username else None,
         )
-        sync_client.admin.command('ping')
+        sync_client.admin.command("ping")
         return sync_client
-    except Exception as e:
-        print(f"MongoDB connection error: {e}")
+    except Exception:
+        logger.exception("MongoDB connection error")
         return None
+
 
 def get_mongodb_database():
     try:
         db_client = connect_to_mongodb()
         return db_client[mongodb_database]
-    except Exception as e:
-        print(e)
+    except Exception:
+        logger.exception("Failed to get MongoDB database")
         return None
 
-def get_mongodb_collection(collection_name):
+
+def get_mongodb_collection(collection_name: str):
     try:
         database = get_mongodb_database()
         return database[collection_name]
-    except Exception as e:
-        print(e)
+    except Exception:
+        logger.exception("Failed to get MongoDB collection")
         return None

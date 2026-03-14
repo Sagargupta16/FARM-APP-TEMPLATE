@@ -1,7 +1,9 @@
 from fastapi.testclient import TestClient
+
 from main import app
 
 client = TestClient(app)
+
 
 def test_health_check():
     """Test the health check endpoint"""
@@ -10,6 +12,7 @@ def test_health_check():
     data = response.json()
     assert data["status"] == "healthy"
     assert "message" in data
+
 
 def test_root_endpoint():
     """Test the root endpoint when client_build doesn't exist"""

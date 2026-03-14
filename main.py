@@ -1,18 +1,24 @@
-import os
+from __future__ import annotations
+
 import logging
+import os
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 from routes.abc_routes import router as abc_router
 
 logger = logging.getLogger("farm_app")
+
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     logger.info("FARM App starting up")
     yield
     logger.info("FARM App shutting down")
+
 
 app = FastAPI(
     title="FARM App Template",
@@ -35,15 +41,19 @@ app.add_middleware(
 # Include API routes
 app.include_router(abc_router, prefix="/api/v1", tags=["example"])
 
-# Health check endpoint
+
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "message": "FARM App Template is running"}
+
 
 # Only mount static files if the client_build directory exists
 if os.path.exists("client_build"):
     app.mount("/", StaticFiles(directory="client_build", html=True), name="frontend")
 else:
+
     @app.get("/")
     async def root():
-        return {"message": "FARM App Template - React frontend not built yet. Run 'npm run build' in the client directory first."}
+        return {
+            "message": "FARM App Template - React frontend not built yet. Run 'npm run build' in the client directory first."
+        }

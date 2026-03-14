@@ -10,18 +10,18 @@ A clean template for building full-stack applications using the FARM stack:
 - FastAPI backend with automatic API documentation
 - React 19 frontend with Vite for fast builds
 - MongoDB integration with Motor (async driver)
-- Docker and Docker Compose support
+- Docker and Docker Compose support with healthchecks
 - Example CRUD operations (Users)
 - CI/CD with GitHub Actions (lint, test, Docker build)
-- Ruff for Python linting
+- Ruff for Python linting and formatting
 - Environment variable configuration with python-dotenv
 
 ## Quick Start
 
 ### Prerequisites
 
-- Python 3.12+
-- Node.js 18+
+- Python 3.13+
+- Node.js 22+
 - MongoDB (or use Docker)
 
 ### Method 1: Using Docker (Recommended)
@@ -96,6 +96,7 @@ FARM-APP-TEMPLATE/
 │
 ├── client/                 # React frontend (Vite)
 │   ├── vite.config.js      # Vite configuration
+│   ├── eslint.config.js    # ESLint flat config
 │   ├── index.html          # HTML entry point
 │   ├── package.json
 │   └── src/
@@ -152,12 +153,14 @@ Run `make help` to see all commands:
 
 ```
 build                Build frontend for production
+clean                Remove build artifacts and caches
 dev                  Start backend dev server
 dev-frontend         Start frontend dev server
 docker-down          Stop all Docker Compose services
 docker-logs          Follow Docker Compose logs
 docker-rebuild       Rebuild and start all services
 docker-up            Start all services with Docker Compose
+format               Format Python code with ruff
 install              Install all dependencies (backend + frontend)
 lint                 Run ruff linter
 lint-fix             Run ruff linter with auto-fix

@@ -14,6 +14,11 @@ services:
       - mongodb_data:/data/db
     networks:
       - farm_network
+    healthcheck:
+      test: mongosh --eval "db.adminCommand('ping')" --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   # FastAPI Backend
   backend:
@@ -29,7 +34,8 @@ services:
       - MONGODB_USERNAME=${MONGODB_USERNAME:-admin}
       - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - farm_network
     volumes:

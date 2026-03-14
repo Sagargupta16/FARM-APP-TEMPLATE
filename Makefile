@@ -1,4 +1,4 @@
-.PHONY: help install dev build test lint docker-up docker-down docker-rebuild
+.PHONY: help install dev build test lint format docker-up docker-down docker-rebuild clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -24,6 +24,13 @@ lint: ## Run ruff linter
 
 lint-fix: ## Run ruff linter with auto-fix
 	ruff check --fix .
+
+format: ## Format Python code with ruff
+	ruff format .
+
+clean: ## Remove build artifacts and caches
+	rm -rf __pycache__ .pytest_cache .coverage htmlcov client_build
+	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
 docker-up: ## Start all services with Docker Compose
 	docker compose up -d

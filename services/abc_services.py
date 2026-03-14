@@ -1,15 +1,19 @@
-from models.abc_models import User, UserCreate
-from config.secrets_parser import get_database
-from bson import ObjectId
+from __future__ import annotations
+
 from datetime import datetime, timezone
-from typing import List, Optional
+
+from bson import ObjectId
+
+from config.secrets_parser import get_database
+from models.abc_models import User, UserCreate
+
 
 class UserService:
     def __init__(self):
         self.db = get_database()
         self.collection = self.db.users
 
-    async def get_all_users(self) -> List[User]:
+    async def get_all_users(self) -> list[User]:
         """Get all users from database"""
         users = []
         async for user in self.collection.find():
@@ -18,7 +22,7 @@ class UserService:
             users.append(User(**user))
         return users
 
-    async def get_user_by_id(self, user_id: str) -> Optional[User]:
+    async def get_user_by_id(self, user_id: str) -> User | None:
         """Get a user by ID"""
         try:
             user = await self.collection.find_one({"_id": ObjectId(user_id)})
